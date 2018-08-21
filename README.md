@@ -6,8 +6,8 @@ This script does the following:
   2. Saves files locally.
   3. Searches these files for keywords.
   4. Logs snippets of keyword found in the files.
-  5. Removes log if there were no keywords found. (This is to reduce the 
-      producing too many useless log files.) 
+  5. Removes log if there were no keywords found. (This is to reduce 
+      making too many useless log files.) 
 
 Usage:
   python3 dumpmonScraper.py 
