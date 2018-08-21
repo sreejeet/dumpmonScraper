@@ -4,9 +4,9 @@ from os import path
 import os
 import time
 
-# Setting timezone
-os.environ['TZ'] = 'Asia/Kolkata'
-time.tzset()
+# Setting timezone (Linux only)
+# os.environ['TZ'] = 'Asia/Kolkata'
+# time.tzset()
 
 # Is your Internet working?
 try:
@@ -33,7 +33,8 @@ while True:
 	errorCount = 0
 	start_time = str(time.ctime())
 	log_time = time.localtime()
-
+	
+	# Time formated for file name as YYYYMMDD-HHMMSS
 	fileTime =	str(log_time.tm_year)\
 	+ str(log_time.tm_mon).zfill(2)\
 	+ str(log_time.tm_mday).zfill(2)\
@@ -75,11 +76,10 @@ while True:
 		+ " starting "
 		+ start_time)
 
-	# print("\n----------\nBeginning scraping round " +\
-		# str(round) + " on " + start_time + "...\n")
-	print('\n' + str(round).zfill(3) + ' ' + fileTime)
-
-	# Retrieving last 20 tweeted dumpmon links
+	print("\n----------\nBeginning scraping round " +\
+		str(round) + " on " + start_time + "...\n")
+	
+	# Retrieving last 20 tweeted @dumpmon links
 	page = urllib.request.urlopen("https://twitter.com/dumpmon")
 	soup = BeautifulSoup(page, "html.parser")
 	links = soup.find_all("span", attrs={"class":"js-display-url"})
@@ -94,8 +94,6 @@ while True:
 			+ str(log_time.tm_year)
 			+ "/" +	str(log_time.tm_mon)
 			+ "/" + link[-9:-1] + ".txt")):
-			# log.write(": Already retrieved")
-			# print("[Already retrieved] " + link)
 			continue
 
 		log.write("\n>>>" + link)
@@ -126,7 +124,7 @@ while True:
 			out.write(rsp)
 			out.close()
 			log.write(": Retrieved")
-			# print("[Retrieved] " + link)
+			print("[Retrieved] " + link)
 
 			# Searching and logging keywords
 			pos = -1
@@ -170,7 +168,7 @@ while True:
 			print(str(err))
 			errorCount+=1
 
-	# Ending round
+	# Ending current round
 	end_time = str(time.ctime())
 
 	log.write("\nEnding log of round "
@@ -179,13 +177,12 @@ while True:
 		+ " error(s) occurred.")
 	log.close()
 
-	# print("\nEnding scraping round " + str(round) + " on " +\
-		# end_time + "\n" + str(errorCount) +\
-		# " errors.")
-
-	# print('\n--End round ' + str(round).zfill(3) + ' ' + end_time)
+	print("\nEnding scraping round " + str(round) + " on " +\
+		end_time + "\n" + str(errorCount) +\
+		" errors.")
 
 	# Removing log if nothing found
+	# This is a shell command. Use appropriate command for your OS
 	if nothingFound:
 		os.system('rm ' + logFilePath)
 
@@ -193,8 +190,8 @@ while True:
 	if(delaySeconds == 0):
 		break
 
-	# print("\nNext run with " +\
-		# str(delaySeconds) + " second(s) delay...")
+	print("\nNext run with " +\
+		str(delaySeconds) + " second(s) delay...")
 
 	tmp = "\n\n"
 	round+=1
