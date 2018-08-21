@@ -1,5 +1,5 @@
-# dumpmonScraper
-A simple python script to get dumpmon links from twitter.
+# dumpmonScraper (python 3.6.x)
+A python script to get dumpmon links from twitter.
 
 This script does the following:
   1. Find links from last 20 tweets by @dumpmon
