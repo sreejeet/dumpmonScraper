@@ -18,4 +18,4 @@ Runs ONE time.
 ```sh
 $ python3 dumpmonScraper.py 200
 ```
-Runs indefinitely with a delay of 200 seconds between each round.
+Runs indefinitely with a delay of 200 seconds between every 20 tweets.
