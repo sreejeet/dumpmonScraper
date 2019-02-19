@@ -10,12 +10,13 @@ This script does the following:
       making too many useless log files.) 
 
 Usage:
+
+To run ONE time.
 ```sh
 $ python3 dumpmonScraper.py
 ```
-Runs ONE time.
 
+To run indefinitely with a delay of 200 seconds between every 20 tweets.
 ```sh
 $ python3 dumpmonScraper.py 200
 ```
-Runs indefinitely with a delay of 200 seconds between every 20 tweets.
